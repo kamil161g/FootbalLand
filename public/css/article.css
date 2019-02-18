@@ -1,0 +1,15 @@
+.jumbotron
+{
+    width: auto;
+    margin: auto;
+    height: auto;
+    overflow-wrap: break-word;
+
+}
+.col-md-6
+{
+    width: 80%;
+    background-color: #b3b3b3;
+    color: black;
+    border-radius: 10%;
+}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
+            <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+            <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+            <link rel="stylesheet" href="{{ asset('node_modules/bootstrap/dist/css/bootstrap.css') }}">
+        {% endblock %}
+    </head>
+    <body style="background-image:url('{{asset('tlo.jpg')}}'); font-family: 'Lato', sans-serif;">
+    {#<div class="container-fluid">#}
+        {#<h1>FootbalLand</h1>#}
+        {#<div class="nav"></div>#}
+    {#</div>#}
+
+    <div class="row">
+        <div class="col-md-1"><h2><a style="text-decoration: none; color: gold" href={{ path('index') }}>FootbalLand</a> </h2></div>
+            <div class="col-md-1"></div>
+            <div class="col-md-1">Opcja1</div>
+            <div class="col-md-1">Opcja2</div>
+            <div class="col-md-1">Opcja3</div>
+            <div class="col-md-1">Opcja4</div>
+            <div class="col-md-1"><a style="text-decoration: none; color: gold" href="{{ path('login') }}" >Zaloguj się</a> </div>
+
+
+    </div>
+    <img class="col-md-1" style="border-radius: 100%; float: right;" src="{{ asset('madara.png') }}">
+
+
+
+    {% block body%}
+        {% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

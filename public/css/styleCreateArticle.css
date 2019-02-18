@@ -1,0 +1,24 @@
+
+
+.container
+{
+    color: black;
+    background-color: #4e555b;
+    width: 50%!important;
+    opacity: 0.9;
+    border-radius: 50%;
+}
+.form-control
+{
+    margin: auto;
+    width: 50% !important;
+}
+.jumbotron
+{
+    background: 0!important;;
+}
+.error
+{
+    color: red;
+}
+

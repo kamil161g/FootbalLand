@@ -1,0 +1,20 @@
+index:
+    path: /
+    controller: App\Controller\IndexController::indexAction
+
+registration:
+    path: /registration
+    controller: App\Controller\RegistrationController:registrationAction
+
+login:
+    path: /login
+    controller: App\Controller\SecurityController:login
+
+#ARTICLE------------------------------------------------------------------------------------------------
+create_new_article:
+    path: /createarticle
+    controller: App\Controller\CreateNewArticleController:createNewArticleAction
+
+show_article:
+    path: /article/{id}
+    controller: App\Controller\ShowArticleController:selectArticleAction

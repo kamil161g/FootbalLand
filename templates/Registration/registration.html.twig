@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+
+    <link rel="stylesheet" href="{{ asset('css/styleCreateArticle.css') }}">
+
+    {{ parent() }}
+{% endblock %}
+
+    {% block body %}
+
+
+
+
+        <div class="container" style="margin-top: 10%; text-align: center">
+
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('error') %}
+                <div class="alert alert-danger">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+            <div class="jumbotron">
+                <H1>Zarejestruj się</H1>
+                {{ form_start(form) }}
+                {{ form_errors(form.email, {'attr': {'class': 'form-error'}}) }}
+                {{ form_widget(form.email, {'attr': {'class': 'form-control','placeholder': 'Podaj email'}}) }}<br/>
+                {{ form_errors(form.password, {'attr': {'class': 'error'}}) }}
+                {{ form_widget(form.password, {'attr': {'class': 'form-control', 'placeholder': 'Podaj silne hasło'}}) }}<br/>
+
+                {{ form_widget(form.submit, {'attr': {'class': 'btn btn-success'}}) }}
+
+
+                {{ form_end(form) }}
+            </div>
+        </div>
+    {% endblock %}
