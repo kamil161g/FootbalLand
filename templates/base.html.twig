@@ -10,10 +10,7 @@
         {% endblock %}
     </head>
     <body style="background-image:url('{{asset('tlo.jpg')}}'); font-family: 'Lato', sans-serif;">
-    {#<div class="container-fluid">#}
-        {#<h1>FootbalLand</h1>#}
-        {#<div class="nav"></div>#}
-    {#</div>#}
+
 
     <div class="row">
         <div class="col-md-1"><h2><a style="text-decoration: none; color: gold" href={{ path('index') }}>FootbalLand</a> </h2></div>
@@ -22,7 +19,7 @@
             <div class="col-md-1">Opcja2</div>
             <div class="col-md-1">Opcja3</div>
             <div class="col-md-1">Opcja4</div>
-            <div class="col-md-1"><a style="text-decoration: none; color: gold" href="{{ path('login') }}" >Zaloguj się</a> </div>
+            <div class="col-md-1"><a style="text-decoration: none; color: gold" href="{{ path('app_login') }}" >Zaloguj się</a> </div>
 
 
     </div>

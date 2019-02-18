@@ -34,12 +34,11 @@ class CreateNewArticleController extends AbstractController
                         }else{
                             $this->addFlash("error", "Ups! Coś poszło nie tak.");
                         }
-
-
                     }
 
         return $this->render("Article/createArticle.html.twig",[
             'form' => $form->createView(),
         ]);
     }
+
 }

@@ -6,7 +6,7 @@ registration:
     path: /registration
     controller: App\Controller\RegistrationController:registrationAction
 
-login:
+app_login:
     path: /login
     controller: App\Controller\SecurityController:login
 
