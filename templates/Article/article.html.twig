@@ -8,35 +8,58 @@
 
         <div class="jumbotron">
             <img src="{{ asset('piatek.jpg') }}" class="img-thumbnail" style="width: 50%">
-            <h1>{{ article.title }}</h1>
-            <div class="container">
-                {{ article.text }}
-            </div>
-            <hr>
-            <h6>Data opublikowania : {{ article.createAt|date("Y-m-d") }}</h6>
+                <span class="pl-2 article-details">
+                        <span class="a">{{ countFavorite }}</span>
+                           {% if checkHaveYouLiked is not null %}
+                                 <a href="{{ path('add_favorite', {'article': article.id }) }}" class="fas fa-heart like-article js-like-article">
+                           {% else %}
+                                <a href="{{ path('add_favorite', {'article': article.id }) }}" class="far fa-heart like-article js-like-article">
+                           {%  endif%}
+                        </a>
+                    </span>
+                        <h1>{{ article.title }} </h1>
+        <div class="container">
+              {{ article.text }}
         </div>
+
+         <hr>
+             <h6>Data opublikowania : {{ article.createAt|date("Y-m-d") }}</h6>
+                            </div>
         <div class="col-md-6">
             <h3>Autor: {{ article.author }}</h3>
-            <img src="{{ asset('madara.png') }}" class="img-fluid" style="border-radius: 100%;" >
+                <img src="{{ asset('madara.png') }}" class="img-fluid" style="border-radius: 100%;" >
         </div>
             <div class="jumbotron" style="width: 50%; float: left">
+
                 {% for message in app.flashes('success') %}
                     <div class="alert alert-success">
                         {{ message }}
                     </div>
                 {% endfor %}
-                {% for message in app.flashes('error') %}
-                    <div class="alert alert-danger">
-                        {{ message }}
-                    </div>
+
+                    {% for message in app.flashes('error') %}
+                        <div class="alert alert-danger">
+                            {{ message }}
+                        </div>
                 {% endfor %}
                 <h4>Dodaj komentarz:</h4>
-                {{ form_start(form) }}
-                {{ form_errors(form.text, {'attr': {'class': 'form-error'}}) }}
-                {{ form_widget(form.text, {'attr': {'class': 'form-control','placeholder': 'Podaj treść komentarza'}}) }}<br/>
-                {{ form_widget(form.submit, {'attr': {'class': 'btn btn-success'}}) }}
-                {{ form_end(form) }}
+
+                    {{ form_start(form) }}
+                        {{ form_errors(form.text, {'attr': {'class': 'form-error'}}) }}
+                        {{ form_widget(form.text, {'attr': {'class': 'form-control','placeholder': 'Podaj treść komentarza'}}) }}<br/>
+                        {{ form_widget(form.submit, {'attr': {'class': 'btn btn-success'}}) }}
+                    {{ form_end(form) }}
+
+                <div class="jumbotron" style="width: 50%; float: left">
+                        <h4>Komentarze: </h4>
+                            {% for comment in comments %}
+
+                                <p class="kom" style="background-color: lightgray">{{ comment.text}} Napisał: {{ comment.author.email }}</p>
+
+                            {% endfor %}
+                </div>
             </div>
+
 
         <img class="col-md-2" style="border-radius: 100%; float: right;" src="{{ asset('madara.png') }}">
         <img class="col-md-2" style="border-radius: 100%; float: right;" src="{{ asset('madara.png') }}">
@@ -47,3 +70,26 @@
 
 
     {% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    {#<script src="{{ asset('js/article_show.js') }}"></script>#}
+
+    <script>
+        $(document).ready(function() {
+            $('.js-like-article').on('click', function(e) {
+                e.preventDefault();
+                var $link = $(e.currentTarget);
+                $link.toggleClass('far fa-heart').toggleClass('fas fa-heart');
+                $('.a').html(
+                    {{ countFavorite+1 }}
+                );
+                $.ajax({
+                    url:        '/addfavorite/{{ article.id }}',
+                });
+            });
+        });
+
+    </script>
+{% endblock %}

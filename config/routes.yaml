@@ -1,10 +1,10 @@
 index:
     path: /
-    controller: App\Controller\IndexController::indexAction
+    controller: App\Controller\IndexController::index
 
 registration:
     path: /registration
-    controller: App\Controller\RegistrationController:registrationAction
+    controller: App\Controller\RegistrationController:registration
 
 app_login:
     path: /login
@@ -13,8 +13,12 @@ app_login:
 #ARTICLE------------------------------------------------------------------------------------------------
 create_new_article:
     path: /createarticle
-    controller: App\Controller\CreateNewArticleController:createNewArticleAction
+    controller: App\Controller\CreateNewArticleController:createNewArticle
 
 show_article:
-    path: /article/{id}
-    controller: App\Controller\ShowArticleController:selectArticleAction
+    path: /article/{article}
+    controller: App\Controller\ArticleController:showArticleAndAddAndShowComment
+
+add_favorite:
+    path: /addfavorite/{article}
+    controller: App\Controller\FavoriteController:addFavoriteArticleForUser

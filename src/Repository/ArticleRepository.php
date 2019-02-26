@@ -17,13 +17,22 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
 class ArticleRepository extends ServiceEntityRepository
 {
 
+    /**
+     * ArticleRepository constructor.
+     * @param RegistryInterface $registry
+     */
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Article::class);
 
     }
 
-    public function addArticle($article)
+    /**
+     * @param $article
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function insertArticle($article)
     {
         $em = $this->_em;
         $article->setAuthor("Kamil");

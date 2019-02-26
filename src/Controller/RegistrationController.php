@@ -11,25 +11,45 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Class RegistrationController
+ * @package App\Controller
+ */
 class RegistrationController extends AbstractController
 {
+    /**
+     * @var User
+     */
     private $user;
+
+    /**
+     * @var RegistrationService
+     */
     private $registrationService;
 
+    /**
+     * RegistrationController constructor.
+     * @param RegistrationService $registrationService
+     */
     public function __construct(RegistrationService $registrationService)
     {
         $this->user = new User();
         $this->registrationService = $registrationService;
     }
 
-    public function registrationAction(Request $request) : Response
+    /**
+     * @param Request $request
+     * @return Response
+     */
+    public function registration(Request $request) : Response
     {
         $form = $this->createForm(RegistrationFormType::class, $this->user);
 
             $form->handleRequest($request);
 
                 if($form->isSubmitted() && $form->isValid()){
-                    $this->registrationService->insertUser($this->user, $form->get('password')->getData());
+                    $plainPassword = $form->get('password')->getData();
+                    $this->registrationService->setUser($this->user, $plainPassword);
                 }
 
         return $this->render("Registration/registration.html.twig",[

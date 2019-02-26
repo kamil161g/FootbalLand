@@ -1,19 +1,21 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: kamil
- * Date: 17.02.19
- * Time: 15:44
- */
+
 
 namespace App\Controller;
 
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+/**
+ * Class IndexController
+ * @package App\Controller
+ */
 class IndexController extends AbstractController
 {
-    public function indexAction()
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function index()
     {
 
         return $this->render("index.html.twig");

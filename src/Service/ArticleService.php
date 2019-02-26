@@ -6,20 +6,37 @@ namespace App\Service;
 use App\Entity\Article;
 use Doctrine\ORM\EntityManagerInterface;
 
+/**
+ * Class ArticleService
+ * @package App\Service
+ */
 class ArticleService
 {
+    /**
+     * @var EntityManagerInterface
+     */
     private $repository;
 
 
+    /**
+     * ArticleService constructor.
+     * @param EntityManagerInterface $repository
+     */
     public function __construct(EntityManagerInterface $repository)
     {
         $this->repository = $repository;
     }
 
 
-    public function insertArticle($article)
+    /**
+     * @param $article
+     * @return bool
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function setArticle($article)
     {
-        if($this->repository->getRepository(Article::class)->addArticle($article)){
+        if($this->repository->getRepository(Article::class)->insertArticle($article)){
             return false;
         }else{
             return true;
@@ -27,7 +44,11 @@ class ArticleService
 
     }
 
-    public function selectArticle($id)
+    /**
+     * @param $id
+     * @return Article|object|null
+     */
+    public function getById($id)
     {
         return $this->repository->getRepository(Article::class)->findOneBy(['id' => $id]);
     }

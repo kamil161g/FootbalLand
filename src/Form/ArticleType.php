@@ -14,8 +14,16 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
+/**
+ * Class ArticleType
+ * @package App\Form
+ */
 class ArticleType extends AbstractType
 {
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
         public function buildForm(FormBuilderInterface $builder, array $options)
         {
             $builder
@@ -44,6 +52,9 @@ class ArticleType extends AbstractType
                 ->add('submit', SubmitType::class, ['label' => 'Wyślij']);
         }
 
+    /**
+     * @param OptionsResolver $resolver
+     */
         public function configureOptions(OptionsResolver $resolver)
         {
             $resolver
