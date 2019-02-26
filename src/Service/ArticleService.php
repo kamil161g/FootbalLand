@@ -52,4 +52,12 @@ class ArticleService
     {
         return $this->repository->getRepository(Article::class)->findOneBy(['id' => $id]);
     }
+
+    /**
+     * @return Article[]|object[]
+     */
+    public function getThreeLatestArticle()
+    {
+        return $this->repository->getRepository(Article::class)->findBy([], ['id' => 'ASC'], 3);
+    }
 }
