@@ -36,6 +36,11 @@ class Comment
      */
     private $article;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $update_at;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -85,6 +90,18 @@ class Comment
     public function setArticle(?Article $article): self
     {
         $this->article = $article;
+
+        return $this;
+    }
+
+    public function getUpdateAt(): ?\DateTimeInterface
+    {
+        return $this->update_at;
+    }
+
+    public function setUpdateAt(\DateTimeInterface $update_at): self
+    {
+        $this->update_at = $update_at;
 
         return $this;
     }

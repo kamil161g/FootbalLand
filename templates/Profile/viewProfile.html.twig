@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+    {% block body %}
+
+        <div class="container">
+            <button class="btn btn-primary" type="button">
+                Messages <span class="badge">0</span>
+            </button>
+                    <a href="{{ path('view_article_by_id_user', {'user': user.id}) }}">
+                        <button class="btn btn-default">Artykuły</button>
+                    </a>
+                    <div class="btn btn-default">XXX : obserwujących</div>
+                    <div class="btn btn-default">Obserwowani : XXX</div>
+                    <div class="btn btn-default">Ulubione artykuły</div>
+        </div>
+
+        <div class="jumbotron">
+        <p>email : {{ user.email }}</p>
+        </div>
+
+
+
+
+    {% endblock %}

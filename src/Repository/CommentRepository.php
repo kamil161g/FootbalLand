@@ -19,11 +19,27 @@ class CommentRepository extends ServiceEntityRepository
         parent::__construct($registry, Comment::class);
     }
 
-    public function insertComment($comment, $user)
+    /**
+     * @param $comment
+     * @param $user
+     * @param $article
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function insertComment($comment, $user, $article)
     {
         $em = $this->_em;
         $comment->setAuthor($user);
         $comment->setCreatedAt(new \DateTime('@'.strtotime('now +1 hours')));
+        $comment->setArticle($article);
+        $em->persist($comment);
+        $em->flush();
+    }
+
+    public function editComment($comment)
+    {
+        $em = $this->_em;
+        $comment->setUpdateAt(new \DateTime('@'.strtotime('now +1 hours')));
         $em->persist($comment);
         $em->flush();
     }

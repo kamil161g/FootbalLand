@@ -53,6 +53,7 @@ class CreateNewArticleController extends AbstractController
 
                         if($this->articleService->setArticle($this->article)){
                             $this->addFlash("success", "Dodałeś artykuł.");
+                                return $this->redirectToRoute("show_article", ['article' => $this->article->getId()]);
                         }else{
                             $this->addFlash("error", "Ups! Coś poszło nie tak.");
                         }

@@ -30,11 +30,6 @@ class ArticleController extends AbstractController
     private $commentService;
 
     /**
-     * @var Comment
-     */
-    private $comment;
-
-    /**
      * @var FavoriteService
      */
     private $favoriteService;
@@ -50,49 +45,51 @@ class ArticleController extends AbstractController
         $this->articleService = $articleService;
         $this->commentService = $commentService;
         $this->favoriteService = $favoriteService;
-        $this->comment = new Comment();
 
     }
 
     /**
-     * @param Article $article
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param Article $article
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function showArticleAndAddAndShowComment($article, Request $request)
+    public function showArticleAndAddAndShowComment(Request $request, Article $article)
     {
-        $article = $this->articleService->getById($article);
+        $comment = new Comment();
 
-            $form = $this->createForm(CommentType::class, $this->comment);
+            $article = $this->articleService->getById($article);
 
-                $form->handleRequest($request);
+                $form = $this->createForm(CommentType::class, $comment);
 
-                    if($form->isSubmitted() && $form->isValid()){
+                    $form->handleRequest($request);
 
-                        if($this->commentService->setComment($this->comment)){
-                            $this->addFlash("success", "Dodałeś komentarz.");
-                        }else{
-                            $this->addFlash("error", "Ups! Coś poszło nie tak.");
+                        if($form->isSubmitted() && $form->isValid()){
+
+                            if($this->commentService->setComment($comment, $article)){
+                                $this->addFlash("success", "Dodałeś komentarz.");
+                                    return $this->redirectToRoute('show_article', ['article' => $article->getId()]);
+                            }else{
+                                $this->addFlash("error", "Ups! Coś poszło nie tak.");
+                            }
+
                         }
 
-                    }
+            $comments = $this->commentService->getById($article);
 
-        $comments = $this->commentService->getById($article);
+                $countFavorite = count($this->favoriteService->getByIdArticle($article));
 
-            $countFavorite = count($this->favoriteService->getByIdArticle($article));
+                    $checkHaveYouLiked = $this->favoriteService->checkYouStatusHeart($article);
 
-                $checkHaveYouLiked = $this->favoriteService->checkYouStatusHeart($article);
-
-
+                        $showRandomArticle = $this->articleService->getThreeLatestArticle();
 
 
         return $this->render("Article/article.html.twig",[
             'article' => $article,
             'form' => $form->createView(),
             'comments' => $comments,
-            'countComments' => $comments,
             'countFavorite' => $countFavorite,
-            'checkHaveYouLiked' => $checkHaveYouLiked
+            'checkHaveYouLiked' => $checkHaveYouLiked,
+            'random' => $showRandomArticle
         ]);
     }
 }

@@ -10,10 +10,17 @@ app_login:
     path: /login
     controller: App\Controller\SecurityController:login
 
+app_logout:
+    path: /logout
+
 #ARTICLE------------------------------------------------------------------------------------------------
 create_new_article:
     path: /createarticle
     controller: App\Controller\CreateNewArticleController:createNewArticle
+
+edit_article:
+    path: /editarticle/{article}
+    controller: App\Controller\EditArticleController:editArticle
 
 show_article:
     path: /article/{article}
@@ -22,3 +29,21 @@ show_article:
 add_favorite:
     path: /addfavorite/{article}
     controller: App\Controller\FavoriteController:addFavoriteArticleForUser
+
+
+#PROFILE------------------------------------------------------------------------------------------------
+
+view_profile:
+    path: /profile/{user}
+    controller: App\Controller\ProfileController:viewProfile
+
+view_article_by_id_user:
+    path: /profile/article/{user}
+    controller: App\Controller\ProfileController:selectArticle
+
+
+#COMMENT------------------------------------------------------------------------------------------------
+
+edit_comment:
+    path: /editcomment/{comment}/{article}
+    controller: App\Controller\CommentController:editComment

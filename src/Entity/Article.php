@@ -28,10 +28,6 @@ class Article
      */
     private $text;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $author;
 
     /**
      * @ORM\Column(type="datetime")
@@ -53,10 +49,17 @@ class Article
      */
     private $favorite;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="article")
+     */
+    private $author;
+    
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->favorite = new ArrayCollection();
+        $this->author = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -87,18 +90,7 @@ class Article
 
         return $this;
     }
-
-    public function getAuthor(): ?string
-    {
-        return $this->author;
-    }
-
-    public function setAuthor(string $author): self
-    {
-        $this->author = $author;
-
-        return $this;
-    }
+    
 
     public function getCreateAt(): ?\DateTimeInterface
     {
@@ -185,4 +177,17 @@ class Article
 
         return $this;
     }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
 }

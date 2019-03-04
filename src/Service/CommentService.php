@@ -35,11 +35,28 @@ class CommentService
 
     /**
      * @param $comment
+     * @param $article
+     * @return bool
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function setComment($comment, $article)
+    {
+        if($this->repository->getRepository(Comment::class)->insertComment($comment, $this->user, $article)){
+            return false;
+        }else{
+            return true;
+        }
+
+    }
+
+    /**
+     * @param $comment
      * @return bool
      */
-    public function setComment($comment)
+    public function editComment($comment)
     {
-        if($this->repository->getRepository(Comment::class)->insertComment($comment, $this->user)){
+        if($this->repository->getRepository(Comment::class)->editComment($comment)){
             return false;
         }else{
             return true;

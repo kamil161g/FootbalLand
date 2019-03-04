@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+    {% block body %}
+        <div class="container">
+                {% for article in article %}
+
+                    <a href="{{ path('show_article', {'article': article.id}) }}" class="btn btn-success">
+                        {{ article.title }}
+                    </a><br/>
+
+                {% endfor %}
+        </div>
+    {% endblock %}

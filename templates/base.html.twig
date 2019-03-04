@@ -22,13 +22,17 @@
             <div class="col-md-1">Opcja2</div>
             <div class="col-md-1">Opcja3</div>
             <div class="col-md-1">Opcja4</div>
+        {% if is_granted ('IS_AUTHENTICATED_FULLY') %}
+            <div class="col-md-1"><a style="text-decoration: none; color: gold" href="{{ path('app_logout') }}">Wyloguj się</a> </div>
+        <a href="{{ path('view_profile', {'user': app.user.id}) }}">
+            <img class="col-md-1" style="border-radius: 100%; float: right;" src="{{ asset('madara.png') }}">
+        </a>
+            </div>
+        {% else %}
             <div class="col-md-1"><a style="text-decoration: none; color: gold" href="{{ path('app_login') }}">Zaloguj się</a> </div>
+            </div>
 
-
-    </div>
-    <img class="col-md-1" style="border-radius: 100%; float: right;" src="{{ asset('madara.png') }}">
-
-
+        {% endif %}
 
     {% block body%}
         {% endblock %}

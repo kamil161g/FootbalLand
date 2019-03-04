@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Article;
 use App\Service\ArticleService;
 use App\Service\FavoriteService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,12 +21,11 @@ class FavoriteController extends AbstractController
      * @param $article
      * @param FavoriteService $favoriteService
      * @param ArticleService $articleService
-     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function addFavoriteArticleForUser($article, FavoriteService $favoriteService, ArticleService $articleService, Request $request)
+    public function addFavoriteArticleForUser(Article $article, FavoriteService $favoriteService, ArticleService $articleService)
     {
 
             $articleObject = $articleService->getById($article);
