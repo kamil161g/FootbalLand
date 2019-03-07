@@ -53,6 +53,12 @@ class Article
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="article")
      */
     private $author;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $file;
+
     
 
     public function __construct()
@@ -189,5 +195,18 @@ class Article
 
         return $this;
     }
+
+    public function getFile(): ?string
+    {
+        return $this->file;
+    }
+
+    public function setFile(string $file): self
+    {
+        $this->file = $file;
+
+        return $this;
+    }
+
 
 }

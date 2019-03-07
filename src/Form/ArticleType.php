@@ -6,6 +6,7 @@ namespace App\Form;
 
 use App\Entity\Article;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -49,6 +50,7 @@ class ArticleType extends AbstractType
                         'message' => 'Pole nie może być puste'
                     ]),
                 ]])
+                ->add('file', FileType::class, ['label' => 'Dodaj zdjęcia'])
                 ->add('submit', SubmitType::class, ['label' => 'Wyślij']);
         }
 

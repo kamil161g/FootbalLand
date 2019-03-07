@@ -22,32 +22,40 @@ class ArticleService
      * @var TokenStorageInterface
      */
     private $tokenStorage;
+    /**
+     * @var FileUploader
+     */
+    private $fileUploader;
+
+    /**
+     * @var object|string
+     */
+    private $user;
 
 
     /**
      * ArticleService constructor.
      * @param EntityManagerInterface $repository
      * @param TokenStorageInterface $tokenStorage
+     * @param FileUploader $fileUploader
      */
-    public function __construct(EntityManagerInterface $repository, TokenStorageInterface $tokenStorage)
+    public function __construct(EntityManagerInterface $repository, TokenStorageInterface $tokenStorage, FileUploader $fileUploader)
     {
         $this->repository = $repository;
         $this->user = $tokenStorage->getToken()->getUser();
+        $this->fileUploader = $fileUploader;
     }
 
     /**
      * @param $article
-     * @return bool
+     * @param $file
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function setArticle($article)
+    public function setArticle($article, $file)
     {
-        if($this->repository->getRepository(Article::class)->insertArticle($article, $this->user)){
-            return false;
-        }else{
-            return true;
-        }
+        $fileName = $this->fileUploader->upload($file);
+        return $this->repository->getRepository(Article::class)->insertArticle($article, $this->user, $fileName);
     }
 
     /**

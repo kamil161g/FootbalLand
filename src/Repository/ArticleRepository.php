@@ -30,14 +30,16 @@ class ArticleRepository extends ServiceEntityRepository
     /**
      * @param $article
      * @param $user
+     * @param $fileName
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function insertArticle($article, $user)
+    public function insertArticle($article, $user, $fileName)
     {
         $em = $this->_em;
         $article->setAuthor($user);
         $article->setCreateAt(new \DateTime('@'.strtotime('now +1 hours')));
+        $article->setFile($fileName);
         $em->persist($article);
         $em->flush();
     }

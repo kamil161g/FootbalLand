@@ -25,11 +25,13 @@
             <div class="jumbotron">
                 <H1>Dodaj artykuł</H1>
                 {{ form_start(form) }}
+
                     {{ form_errors(form.title, {'attr': {'class': 'form-error'}}) }}
                 {{ form_widget(form.title, {'attr': {'class': 'form-control','placeholder': 'Podaj tytuł'}}) }}<br/>
                     {{ form_errors(form.text, {'attr': {'class': 'error'}}) }}
                 {{ form_widget(form.text, {'attr': {'class': 'form-control', 'placeholder': 'Tutaj wylej swoje przemyślenia :)'}}) }}<br/>
-
+                    {{ form_errors(form.file, {'attr': {'class': 'error'}}) }}
+                {{ form_row(form.file) }}
                 {{ form_widget(form.submit, {'attr': {'class': 'btn btn-success'}}) }}
 
 

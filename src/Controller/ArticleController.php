@@ -52,6 +52,8 @@ class ArticleController extends AbstractController
      * @param Request $request
      * @param Article $article
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function showArticleAndAddAndShowComment(Request $request, Article $article)
     {
